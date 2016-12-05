@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodload.persistence.PictureMapper">
+	<!-- 리절트 맵 -->
+	<resultMap id="pictureResultMap" type="picture">
+		<id column="NO" property="no" />
+		<result column="MENU_NO" property="menuNo" />
+		<result column="LOGICAL_NAME" property="logicalName" />
+		<result column="PHYSICAL_NAME" property="physicalName" />
+		<result column="REGISTRATION_DATE" property="registrationDate" />
+	</resultMap>
+	
+	<!-- 사진 목록 조회 매핑 구문 -->
+	<select id="list" parameterType="picture" resultMap="pictureResultMap">
+		SELECT 
+			NO,
+			LOGICAL_NAME,
+			PHYSICAL_NAME,
+			REGISTRATION_DATE,
+			MENU_NO
+		FROM PICTURE
+		WHERE MENU_NO = #{menuNo}
+	</select>
+	
+	<select id="select" parameterType="picture" resultMap="pictureResultMap">
+		SELECT
+                NO,
+                LOGICAL_NAME,
+                PHYSICAL_NAME,
+                REGISTRATION_DATE,
+                MENU_NO
+          FROM PICTURE
+          WHERE NO=#{no}
+	</select>
+	<!-- 등록 매핑 구문 -->
+	<insert id="insert" parameterType="picture">
+		INSERT INTO PICTURE
+			VALUES (
+				PICTURE_NO_SEQ.NEXTVAL,
+				#{logicalName}, #{physicalName},
+				SYSDATE, #{menuNo}
+			)
+	</insert>
+	
+	<!-- 삭제 매핑 구문 -->
+	<delete id="delete" parameterType="picture">
+		DELETE PICTURE
+		<where>
+			<if test="no > 0">
+				AND NO = #{no}
+			</if>
+			<if test="menuNo > 0">
+				AND MENU_NO = #{menuNo}
+			</if>
+		</where>
+	</delete>
+</mapper>

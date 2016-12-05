@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodload.persistence.MenuMapper">
+	<resultMap id="menuResultMap" type="menu">
+		<id column="NO" property="no" />
+		<result column="NAME" property="name" />
+		<result column="TYPE" property="type" />
+		<result column="PRICE" property="price" />
+		<result column="RESTAURANT_NO" property="restaurantNo" />
+		<result column="RESTAURANT_NAME" property="restaurantName" />
+		<result column="X_COORDINATE" property="xCoordinate" />
+		<result column="Y_COORDINATE" property="yCoordinate" />
+	</resultMap>
+	
+	<select id="list" parameterType="menu" resultMap="menuResultMap">
+		SELECT 
+			M.NO, 
+			M.NAME, 
+			M.TYPE, 
+			M.PRICE,
+			M.RESTAURANT_NO,
+			R.NAME AS RESTAURANT_NAME,
+			R.X_COORDINATE,
+      		R.Y_COORDINATE
+		FROM MENU M, RESTAURANT R
+		<where>
+			<if test="restaurantNo > 0">
+				AND M.RESTAURANT_NO = R.NO
+				AND M.RESTAURANT_NO=#{restaurantNo}
+			</if>
+			<if test="no > 0">
+				AND M.NO = #{no}
+			</if>
+		</where>
+		ORDER BY M.NO ASC
+	</select>
+	
+	<insert id="insert" parameterType="menu">
+		<selectKey keyColumn="NO" keyProperty="no" resultType="int" order="BEFORE" >
+	         SELECT MENU_NO_SEQ.NEXTVAL
+	         FROM DUAL
+     	</selectKey>
+		INSERT INTO MENU
+		VALUES (
+			#{no}, 
+			#{name}, 
+			#{type}, 
+			#{restaurantNo}, 
+			#{price}
+		)
+	</insert>
+	
+	<update id="update" parameterType="menu">
+		UPDATE MENU
+		<set>
+			<if test="name != null">NAME = #{name},</if>
+			<if test="price != null">PRICE = #{price},</if>
+			<if test="type != null">TYPE = #{type}</if>
+		</set>
+		WHERE NO = #{no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM MENU
+		WHERE NO = #{no}
+	</delete>
+</mapper>

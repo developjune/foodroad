@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodload.persistence.RestaurantMapper">
+	<resultMap id="restaurantResultMap" type="restaurant">
+		<id column="NO" property="no" />
+		<result column="NAME" property="name" />
+		<result column="X_COORDINATE" property="xCoordinate" />
+		<result column="Y_COORDINATE" property="yCoordinate" />
+		<result column="ADDRESS" property="address" />
+		<result column="TEL" property="tel" />
+		<result column="RNUM" property="rowNum" />
+	
+		<collection property="menus" ofType="menu" javaType="java.util.ArrayList">
+				<id column="MENU_NO" property="no" />
+				<result column="MENU_NAME" property="name" />
+				<result column="TYPE" property="type" />
+				<result column="PRICE" property="price" />
+	    </collection>
+    </resultMap>
+	
+	<select id="list" parameterType="restaurant" resultMap="restaurantResultMap">
+	      	SELECT *
+	        FROM (
+	       		SELECT ROWNUM RNUM, NO, NAME, X_COORDINATE, Y_COORDINATE, ADDRESS, TEL
+	       		FROM (
+		        	  SELECT
+			          	  R.NO AS NO,
+			         	  R.NAME AS NAME,
+			          	  R.X_COORDINATE AS X_COORDINATE,
+						  R.Y_COORDINATE AS Y_COORDINATE,
+			          	  R.ADDRESS AS ADDRESS,
+						  R.TEL AS TEL
+		      		  FROM RESTAURANT R
+	      		     )
+	      		<where>
+					<if test="searchKeyword != null">
+		    				AND NAME LIKE '%' || #{searchKeyword} || '%'
+		    			</if>
+					<if test="no > 0">
+						AND NO = #{no}
+					</if>
+				</where>
+	      	)
+		<where>
+			<if test="itemStartNo > 0">
+				AND RNUM BETWEEN #{itemStartNo} AND #{itemEndNo}
+			</if>
+		</where>
+	</select>
+	
+	<select id="count" parameterType="restaurant" resultType="int">
+		SELECT COUNT(*) FROM RESTAURANT
+		<where>
+			<if test="searchKeyword != null">
+    			AND NAME LIKE '%' || #{searchKeyword} || '%'
+    		</if>
+		</where>
+	</select>
+	
+	<insert id="insert" parameterType="restaurant">
+		<selectKey keyColumn="NO" keyProperty="no" resultType="int" order="BEFORE" >
+	         SELECT RESTAURANT_NO_SEQ.NEXTVAL
+	         FROM DUAL
+     	</selectKey>
+		INSERT INTO restaurant
+		VALUES (
+		    #{no}, 
+		    #{name},
+		    #{xCoordinate},
+		    #{yCoordinate},
+		    #{address},
+		    #{tel}
+		)
+	</insert>
+	
+	<update id="update" parameterType="restaurant">
+		UPDATE RESTAURANT
+		<set>
+			<if test="name != null">NAME = #{name},</if>
+			<if test="xCoordinate != null">X_COORDINATE = #{xCoordinate},</if>
+			<if test="yCoordinate != null">Y_COORDINATE = #{yCoordinate},</if>
+			<if test="address != null">ADDRESS = #{address},</if>
+			<if test="tel != null">TEL = #{tel}</if>
+		</set>
+		WHERE NO = #{no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM RESTAURANT
+		WHERE NO = #{no}
+	</delete>
+	
+	<select id="listMap" parameterType="restaurant" resultMap="restaurantResultMap">
+		SELECT 
+	      R.NO, 
+	      R.NAME,  
+	      R.ADDRESS, 
+	      R.X_COORDINATE, 
+	      R.Y_COORDINATE,
+	      M.NO MENU_NO, 
+	      M.NAME MENU_NAME, 
+	      M.TYPE, 
+	      M.PRICE
+		FROM RESTAURANT R
+		LEFT OUTER JOIN MENU M
+		ON R.NO = M.RESTAURANT_NO
+  		<where>
+			<if test="type > 0">
+				AND M.TYPE = #{type}
+			</if>
+    		<if test="no > 0">
+    			AND R.NO = #{no}
+    		</if>
+		</where>
+	</select>
+</mapper>

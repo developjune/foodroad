@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodload.persistence.AdminMapper">
+    <!-- 리절트 맵 -->
+    <resultMap id="adminResultMap" type="admin">
+        <id column="ID" property="id" />
+        <result column="PW" property="pw" />
+    </resultMap>
+
+    <!-- 조회 매핑 구문 -->
+    <select id="select" parameterType="admin" 
+            resultMap="adminResultMap">
+        SELECT ID, PW
+		FROM ADMIN
+		WHERE ID = #{id}
+		  AND PW = #{pw}
+    </select>
+</mapper>
