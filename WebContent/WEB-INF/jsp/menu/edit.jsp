@@ -8,6 +8,7 @@
 <title>메뉴 정보 수정</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
 <script type="text/javascript">
 	function edit(restaurantNo, no) {
 		if (document.form.name.value.trim() == "") {
@@ -75,26 +76,46 @@
 	    }
 	};
 </script>
+<script>
+$(document).ready(function() {
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); 
+            if (test == imgInp1) {
+            	reader.onload = function (e) {
+                    $('#blah1').attr('src', e.target.result);
+            	}                   
+                reader.readAsDataURL(input.files[0]);
+            }
+        } 
+    }
+    var test;
+    $("#imgInp1").change(function(){
+        test = imgInp1;
+        readURL(this);
+    });
+});
+</script>
 </head>
 <body>
-	<%-- <form id="pictureForm" name="pictureForm"
+	<form id="pictureForm" name="pictureForm"
 		action="<c:url value="/menu/pictureremoveall" />" method="post">
 		<table style="width: 50%;" border="1" align="center">
 			<tr>
 				<c:forEach items="${listPicture}" var="picture">
-						<input type="hidden" id="menuNo" name="menuNo" value="${menu[0].no}" />
+						<input type="hidden" id="no" name="no" value="${menu[0].no}" />
 						<td colspan="2"><input type="checkbox" value="${picture.no}"
 							name="nos"> <img src="/img/${picture.logicalName}_${picture.physicalName}"
-							width="200" height="200" /></td>
+							width="100" height="100" /></td>
 				</c:forEach>
 				<td align="right" paddingBottom="50px"><input type="button" id="buttonRemove" name="buttonRemove"
 						value="삭제" title="삭제" onclick="remove();" />
 				</td>
 			</tr>
 		</table>
-	</form> --%>
+	</form>
 	<form id="form" name="form" action="<c:url value="/menu/edit" />"
-		method="post" >
+		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="">
 		<input type="hidden" name="restaurantNo" value="">
 		<div style="width:100%;" align="center">
@@ -123,6 +144,13 @@
 			<tr align="center">
 				<td><h5>가격:</h5></td>
 				<td><input type="text" id="price" name="price" value="${menu[0].price }" class="form-control" /></td>
+			</tr>
+			<tr align="center">
+				<td><h5>사진등록</h5></td>
+				<td>
+					<input type="file" id="imgInp1" name="file" value="찾아보기...">
+					<img id="blah1" src="/" alt="1"/>
+				</td>
 			</tr>
 			<tr>
 				<td align="right" colspan="2">

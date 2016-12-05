@@ -91,14 +91,13 @@ $(document).ready(function() {
 					<input type="text" id="price" name="price" class="form-control" />
 				</td>
 			</tr>
-			<!-- <tr>
+			<tr align="center">
+				<td><h5>사진등록</h5></td>
 				<td>
 					<input type="file" id="imgInp1" name="file" value="찾아보기...">
-				</td>
-				<td>
 					<img id="blah1" src="/" alt="1"/>
 				</td>
-			</tr> -->
+			</tr>
 			<tr>
 				<td align="right" colspan="2"><input type="button" class="btn btn-default"
 					id="button_add" name="button_add" value="등록" title="등록"
