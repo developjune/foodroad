@@ -12,6 +12,7 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
 <script type="text/javascript">
    function add() {
       if (document.form.name.value.trim() == "") {
@@ -35,9 +36,29 @@
       }
    };
 </script>
+<script>
+$(document).ready(function() {
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); 
+            if (test == imgInp1) {
+            	reader.onload = function (e) {
+                    $('#blah1').attr('src', e.target.result);
+            	}                   
+                reader.readAsDataURL(input.files[0]);
+            }
+        } 
+    }
+    var test;
+    $("#imgInp1").change(function(){
+        test = imgInp1;
+        readURL(this);
+    });
+});
+</script>
 </head>
 <body>
-   <form id="form" name="form" action="<c:url value="/restaurant/add" />" method="post">
+   <form id="form" name="form" action="<c:url value="/restaurant/add" />" method="post" enctype="multipart/form-data">
       <div style="width:100%;" align="center">
          <table style="width:30%;" class="table table-striped table-bordered">
             <tr>
@@ -69,6 +90,13 @@
                <td><h5>전화번호:</h5></td>
                <td><input type="text" id="tel" class="form-control" name="tel" /></td>
             </tr>
+            <tr>
+				<td><h5>사진등록</h5></td>
+				<td>
+					<input type="file" id="imgInp1" name="file" value="찾아보기...">
+					<img id="blah1" src="/" alt="1"/>
+				</td>
+			</tr>
             <tr>
                <td colspan="2" align="right">
                   <input type="button" class="btn btn-default" id="button_add" name="button_add" value="등록" title="등록" onclick="add();" />

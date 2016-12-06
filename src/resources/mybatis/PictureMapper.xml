@@ -7,7 +7,7 @@
 	<!-- 리절트 맵 -->
 	<resultMap id="pictureResultMap" type="picture">
 		<id column="NO" property="no" />
-		<result column="MENU_NO" property="menuNo" />
+		<result column="RESTAURANT_NO" property="restaurantNo" />
 		<result column="LOGICAL_NAME" property="logicalName" />
 		<result column="PHYSICAL_NAME" property="physicalName" />
 		<result column="REGISTRATION_DATE" property="registrationDate" />
@@ -20,9 +20,9 @@
 			LOGICAL_NAME,
 			PHYSICAL_NAME,
 			REGISTRATION_DATE,
-			MENU_NO
+			RESTAURANT_NO
 		FROM PICTURE
-		WHERE MENU_NO = #{menuNo}
+		WHERE RESTAURANT_NO = #{restaurantNo}
 	</select>
 	
 	<select id="select" parameterType="picture" resultMap="pictureResultMap">
@@ -31,7 +31,7 @@
                 LOGICAL_NAME,
                 PHYSICAL_NAME,
                 REGISTRATION_DATE,
-                MENU_NO
+                RESTAURANT_NO
           FROM PICTURE
           WHERE NO=#{no}
 	</select>
@@ -41,7 +41,7 @@
 			VALUES (
 				PICTURE_NO_SEQ.NEXTVAL,
 				#{logicalName}, #{physicalName},
-				SYSDATE, #{menuNo}
+				SYSDATE, #{restaurantNo}
 			)
 	</insert>
 	
@@ -53,7 +53,7 @@
 				AND NO = #{no}
 			</if>
 			<if test="menuNo > 0">
-				AND MENU_NO = #{menuNo}
+				AND RESTAURANT_NO = #{restaurantNo}
 			</if>
 		</where>
 	</delete>

@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class Picture implements Serializable {
 	private int no;
-	private int menuNo;
+	private int restaurantNo;
 	private String logicalName;
 	private String physicalName;
 	private Date registrationDate;
@@ -14,11 +14,11 @@ public class Picture implements Serializable {
 		
 	}
 	
-	public Picture(int no, int menuNo, String logicalName, String physicalName, Date registrationDate) {
+	public Picture(int no, int restaurantNo, String logicalName, String physicalName, Date registrationDate) {
 		this.no = no;
 		this.logicalName = logicalName;
 		this.physicalName = physicalName;
-		this.menuNo = menuNo;
+		this.restaurantNo = restaurantNo;
 		this.registrationDate = registrationDate;
 	}
 	
@@ -30,12 +30,12 @@ public class Picture implements Serializable {
 		this.no = no;
 	}
 	
-	public int getMenuNo() {
-		return menuNo;
+	public int getRestaurantNo() {
+		return restaurantNo;
 	}
 	
-	public void setMenuNo(int menuNo) {
-		this.menuNo = menuNo;
+	public void setRestaurantNo(int restaurantNo) {
+		this.restaurantNo = restaurantNo;
 	}
 	
 	public String getLogicalName() {

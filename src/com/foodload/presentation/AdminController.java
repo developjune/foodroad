@@ -20,13 +20,11 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	/* 로그인 폼 */
 	@RequestMapping(value = "/loginform", method = RequestMethod.GET)
 	public String loginForm() throws Exception {
 		return "/admin/login";
 	}
 
-	// 로그인 처리
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(Admin admin, HttpSession session, HttpServletRequest request) throws Exception {
 		RedirectView redirectView = new RedirectView("/restaurant/list");
@@ -39,7 +37,6 @@ public class AdminController {
 		return new ModelAndView(redirectView);
 	}
 
-	// 로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpSession session) throws Exception {
 		RedirectView redirectView = new RedirectView("/admin/loginform");

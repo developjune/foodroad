@@ -7,9 +7,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메뉴 목록</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript"
    src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=NfZbwjSruLlfEAQP7NAC">
+</script>
+<script>
+	function getContextPath() {
+		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		return location.href.substring(0, hostIndex + 1);
+	};
+	$(document).ready(function() {
+		$('#button_view_menu').on('click', function() {
+			var url = $('#url').val();
+			window.open(url,"name99", 
+					"width=500px,height=650px,left=100px,top=100px");
+		});
+	});
 </script>
 </head>
 <body>
@@ -24,7 +38,6 @@
          <td align="center">타입</td>
          <td align="center">음식이름</td>
          <td align="center">가격(원)</td>
-         <td align="center">사진</td>
          <td align="center">수정</td>
          <td align="center">삭제</td>
       </tr>
@@ -41,12 +54,6 @@
                </td>
                <td align="center"><c:out value="${menu.name }"></c:out></td>
                <td align="center"><c:out value="${menu.price }"></c:out></td>
-                      <td align="center">
-                          <c:if test="${listPicture[status.index] != null }" >
-                              <img id="img_${status.index }" src="/img/${listPicture[status.index].logicalName }_${listPicture[status.index].physicalName }"
-                              width="200" height="100" >
-                          </c:if>
-                      </td>
                <td style="text-align: center;">
                   <a href="<c:url value="/menu/editform/${menu.no}" />">
                   <input type="button" class="btn btn-default btn-xs btn-block" id="button_view" name="button_view" value="수정" /></a>
@@ -67,6 +74,9 @@
    </table>
    </div>
    <div align="right">
+            <input type="button" class="btn btn-default" id="button_view_menu" name="button_view" value="메뉴판 보기" /></a>
+            <input type="hidden" id="url" value="/img/${listPicture.logicalName }_${listPicture.physicalName }">
+            
             <a href="<c:url value="/menu/addform/${menu.restaurantNo}" />">
                <input type="button" class="btn btn-default" id="button_view" name="button_view" value="메뉴 등록" /></a>
             <a href="<c:url value="/restaurant/list" />"> 
