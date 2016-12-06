@@ -27,26 +27,6 @@
 		}
 	};
 </script>
-<script>
-$(document).ready(function() {
-	function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader(); 
-            if (test == imgInp1) {
-            	reader.onload = function (e) {
-                    $('#blah1').attr('src', e.target.result);
-            	}                   
-                reader.readAsDataURL(input.files[0]);
-            }
-        } 
-    }
-    var test;
-    $("#imgInp1").change(function(){
-        test = imgInp1;
-        readURL(this);
-    });
-});
-</script>
 </head>
 <body>
 	<form id="form" name="form" action="<c:url value="/menu/add/${restaurantNo}" />" 
@@ -89,13 +69,6 @@ $(document).ready(function() {
 				<td><h5>가격:</h5></td>
 				<td>
 					<input type="text" id="price" name="price" class="form-control" />
-				</td>
-			</tr>
-			<tr align="center">
-				<td><h5>사진등록</h5></td>
-				<td>
-					<input type="file" id="imgInp1" name="file" value="찾아보기...">
-					<img id="blah1" src="/" alt="1"/>
 				</td>
 			</tr>
 			<tr>
