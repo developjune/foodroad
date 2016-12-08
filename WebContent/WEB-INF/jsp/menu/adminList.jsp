@@ -19,7 +19,7 @@
 	};
 	$(document).ready(function() {
 		$('#button_view_menu').on('click', function() {
-			if(${listPicture.no == null}) {
+			if(${empty listPicture}) {
 				alert("사진이 없습니다");
 			} else {
 				var url = $('#url').val();

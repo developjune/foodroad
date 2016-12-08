@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foodload.domain.Code;
@@ -35,7 +36,7 @@ public class MainController {
 		List<Restaurant> listRestaurant = this.restaurantService.findMap(restaurant);
 		List<Code> listCode = CodeUtil.getCodes();
 		
-		picture.setRestaurantNo(listRestaurant.get(0).getNo());
+		picture.setRestaurantNo(restaurant.getNo());
 		List<Picture> listPicture = this.pictureService.find(picture);
 	      
         if (listPicture.size() > 0) {

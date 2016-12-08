@@ -136,7 +136,6 @@ public class RestaurantController {
 
 		if (listPicture.size() > 0) {
 			modelAndView.addObject("listPicture", listPicture);
-			System.out.println(listPicture.get(0).getNo());
 		} else {
 			picture = null;
 		}

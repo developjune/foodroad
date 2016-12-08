@@ -124,14 +124,14 @@ html, body {
          var i = ${count.index};
          
          var xResult = String(x).replace(".", "_");
-       var yResult = String(y).replace(".", "_");
+       	 var yResult = String(y).replace(".", "_");
          var no = ${restaurant.no};
          var count = xResult + "_" + yResult;
          
          var count1 = String(x) + "_" + String(y);
          
          mapType.put(count, no); 
-       mapType.put(count1, no);
+         mapType.put(count1, no);
          var marker = new naver.maps.Marker({
             position: new naver.maps.LatLng(y, x),
             icon: {
@@ -213,7 +213,7 @@ html, body {
 		};
 		$(document).ready(function() {
 			$('#button_view_menu').on('click', function() {
-				if(${listPicture.no == null}) {
+				if(${empty listPicture}) {
 					alert("사진이 없습니다");
 				} else {
 					var url = $('#url').val();
