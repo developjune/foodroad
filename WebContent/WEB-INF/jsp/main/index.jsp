@@ -206,6 +206,23 @@ html, body {
          return mapType;
       }
    </script>
+   <script>
+		function getContextPath() {
+			var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+			return location.href.substring(0, hostIndex + 1);
+		};
+		$(document).ready(function() {
+			$('#button_view_menu').on('click', function() {
+				if(${listPicture.no == null}) {
+					alert("사진이 없습니다");
+				} else {
+					var url = $('#url').val();
+					window.open(url,"name99", 
+							"width=500px,height=650px,left=100px,top=100px");
+				}
+			})
+		});
+	</script>
    
     <div class="container">
    <input type="hidden" id="modal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" />
@@ -222,6 +239,8 @@ html, body {
                       <div id="menuList"></div>
                  </div>
                  <div class="modal-footer">
+                      <input type="button" class="btn btn-default" id="button_view_menu" name="button_view" value="메뉴판 보기" />
+            			<input type="hidden" id="url" value="/img/${listPicture.logicalName }_${listPicture.physicalName }">
                       <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                  </div>
                </div>

@@ -12,6 +12,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -131,8 +132,15 @@ public class RestaurantController {
 		modelAndView.addObject("restaurant", listRestaurant);
 
 		picture.setRestaurantNo(no);
-		modelAndView.addObject("listPicture", this.pictureService.find(picture));
+		List<Picture> listPicture = this.pictureService.find(picture);
 
+		if (listPicture.size() > 0) {
+			modelAndView.addObject("listPicture", listPicture);
+			System.out.println(listPicture.get(0).getNo());
+		} else {
+			picture = null;
+		}
+		
 		return modelAndView;
 	}
 
@@ -140,8 +148,6 @@ public class RestaurantController {
 	public ModelAndView edit(Restaurant restaurant, MultipartFile[] file, Picture picture) throws Exception {
 		RedirectView redirectView = new RedirectView("/restaurant/list");
 		redirectView.setExposeModelAttributes(false);
-
-		this.restaurantService.edit(restaurant);
 
 		for (int i = 0; i < file.length; i++) {
 			String[] savedName = new String[file.length];
@@ -159,6 +165,17 @@ public class RestaurantController {
 				System.out.println("¿À·ù" + i);
 			}
 		}
+		this.restaurantService.edit(restaurant);
+
+		return new ModelAndView(redirectView);
+	}
+
+	@RequestMapping(value = "/pictureremoveall", method = RequestMethod.POST)
+	public ModelAndView pictureRemoveAll(@RequestParam("nos") int nos, Restaurant restaurant) throws Exception {
+		RedirectView redirectView = new RedirectView("/restaurant/editform/" + restaurant.getNo());
+		redirectView.setExposeModelAttributes(false);
+
+		this.pictureService.removeAll(nos);
 
 		return new ModelAndView(redirectView);
 	}

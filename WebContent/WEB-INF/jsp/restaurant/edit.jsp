@@ -12,6 +12,7 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
 <script type="text/javascript">
    function edit() {
       if (document.form.name.value.trim() == "") {
@@ -35,9 +36,63 @@
       }
    };
 </script>
+<script type="text/javascript">
+	function remove() {
+		var singleResult = "";
+		var result = "";
+		
+		if (document.pictureForm.nos.length == null) {
+			if (document.pictureForm.nos.checked == true) {
+				singleResult += document.pictureForm.nos.value + "\n";
+			}
+			//선택된 것 이 없으면 
+			if (singleResult == "") {
+				alert("아무것도 선택하지 않으셨습니다");
+			//하나라도 선택이 됐으면 	
+			} else {
+				document.getElementById('pictureForm').submit();
+			}
+		} else {
+				if (document.pictureForm.nos.checked == true) {
+					result += document.pictureForm.nos.value + "\n";
+				}
+			}
+				document.getElementById('pictureForm').submit();
+		};
+	function check(){
+	    cbox = pictureForm.nos;
+	    if(cbox.length) {  // 여러 개일 경우
+	        for(var i = 0; i<=cbox.length;i++) {
+	            cbox[i].checked=pictureForm.all.checked;
+	        }
+	    } else { // 한 개일 경우
+	        cbox.checked=pictureForm.all.checked;
+	    }
+	};
+</script>
+<script>
+$(document).ready(function() {
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader(); 
+            if (test == imgInp1) {
+            	reader.onload = function (e) {
+                    $('#blah1').attr('src', e.target.result);
+            	}
+                reader.readAsDataURL(input.files[0]);
+            }
+        } 
+    }
+    var test;
+    $("#imgInp1").change(function(){
+        test = imgInp1;
+        readURL(this);
+    });
+});
+</script>
 </head>
 <body>
-   <form id="form" name="form" action="<c:url value="/restaurant/edit/${restaurant[0].no}" />" method="post">
+   <form id="form" name="form" action="<c:url value="/restaurant/edit/${restaurant[0].no}" />" method="post" enctype="multipart/form-data">
       <div style="width:100%;" align="center">
          <table style="width:30%;" class="table table-striped table-bordered">
             <tr>
@@ -76,6 +131,13 @@
                </td>
             </tr>
             <tr>
+				<td><h5>사진등록</h5></td>
+				<td>
+					<input type="file" id="imgInp1" name="file" value="찾아보기...">
+					<img id="blah1" src="/" alt="1"/>
+				</td>
+			</tr>
+            <tr>
             	<td align="right" colspan="2">
 		            <input type="button" class="btn btn-default" id="button_add" name="button_add" value="수정" title="수정" onclick="edit();" />
 		            <a href="<c:url value="/restaurant/list/" />">
@@ -86,6 +148,25 @@
          </table>
       </div>
    </form>
+   <form id="pictureForm" name="pictureForm"
+		action="<c:url value="/restaurant/pictureremoveall" />" method="post">
+		<div style="width:100%;" align="center">
+			<input type="hidden" id="no" name="no" value="${restaurant[0].no}" />
+	        <table style="width:30%;" class="table table-striped table-bordered">
+				<tr>
+					<c:if test="${!empty listPicture}" >
+						<td colspan="2"><input type="checkbox" checked="checked" value="${listPicture[0].no}"
+							name="nos" /> <%-- <img src="/img/${listPicture[0].logicalName}_${listPicture[0].physicalName}"
+							width="100" height="100" /> --%><c:out value="${listPicture[0].physicalName }"></c:out>
+						</td>
+					</c:if>
+					<td align="right"><input type="button" id="buttonRemove" name="buttonRemove"
+							value="삭제" title="삭제" onclick="remove();" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</form>
    <div style="clear: left; width: 100%;" align="center">
  		<div id="map" style="width: 800px; height: 500px;"></div>
    </div>

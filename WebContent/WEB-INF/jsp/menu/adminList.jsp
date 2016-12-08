@@ -19,10 +19,14 @@
 	};
 	$(document).ready(function() {
 		$('#button_view_menu').on('click', function() {
-			var url = $('#url').val();
-			window.open(url,"name99", 
-					"width=500px,height=650px,left=100px,top=100px");
-		});
+			if(${listPicture.no == null}) {
+				alert("사진이 없습니다");
+			} else {
+				var url = $('#url').val();
+				window.open(url,"name99", 
+						"width=500px,height=650px,left=100px,top=100px");
+			}
+		})
 	});
 </script>
 </head>
@@ -74,7 +78,7 @@
    </table>
    </div>
    <div align="right">
-            <input type="button" class="btn btn-default" id="button_view_menu" name="button_view" value="메뉴판 보기" /></a>
+            <input type="button" class="btn btn-default" id="button_view_menu" name="button_view" value="메뉴판 보기" />
             <input type="hidden" id="url" value="/img/${listPicture.logicalName }_${listPicture.physicalName }">
             
             <a href="<c:url value="/menu/addform/${menu.restaurantNo}" />">

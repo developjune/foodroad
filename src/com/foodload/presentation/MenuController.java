@@ -132,14 +132,4 @@ public class MenuController {
       
       return new ModelAndView(redirectView);
    }
-   
-   @RequestMapping(value = "/pictureremoveall", method = RequestMethod.POST)
-   public ModelAndView pictureRemoveAll(@RequestParam("nos") int[] nos, Menu menu) throws Exception {
-      RedirectView redirectView = new RedirectView("/menu/editform/" + menu.getNo());
-      redirectView.setExposeModelAttributes(false);
-      
-      this.pictureService.removeAll(nos);
-      
-      return new ModelAndView(redirectView);
-   }
 }

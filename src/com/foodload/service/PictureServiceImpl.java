@@ -12,8 +12,8 @@ import com.foodload.persistence.PictureMapper;
 
 @Service
 public class PictureServiceImpl implements PictureService {
-	private static String parentPath = "C:/Users/JUNE/workspace/foodload/WebContent/img";
-	
+	private static String parentPath = "C:/Users/jsm/workspace/foodroad/WebContent/img";
+
 	@Resource
 	private PictureMapper pictureMapper;
 
@@ -33,17 +33,15 @@ public class PictureServiceImpl implements PictureService {
 	}
 
 	@Override
-	public void removeAll(int[] nos) {
-		for (int i = 0; i < nos.length; i++) {
-			Picture picture = new Picture();
-			picture.setNo(nos[i]);
+	public void removeAll(int nos) {
+		Picture picture = new Picture();
+		picture.setNo(nos);
 
-			picture = this.pictureMapper.select(picture);
+		picture = this.pictureMapper.select(picture);
 
-			File file = new File(parentPath + "/" + picture.getLogicalName() + "_" + picture.getPhysicalName());
-			file.delete();
+		File file = new File(parentPath + "/" + picture.getLogicalName() + "_" + picture.getPhysicalName());
+		file.delete();
 
-			this.pictureMapper.delete(picture);
-		}
+		this.pictureMapper.delete(picture);
 	}
 }

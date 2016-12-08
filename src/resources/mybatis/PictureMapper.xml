@@ -52,7 +52,7 @@
 			<if test="no > 0">
 				AND NO = #{no}
 			</if>
-			<if test="menuNo > 0">
+			<if test="restaurantNo > 0">
 				AND RESTAURANT_NO = #{restaurantNo}
 			</if>
 		</where>

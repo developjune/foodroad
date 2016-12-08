@@ -8,5 +8,5 @@ public interface PictureService {
 	public List<Picture> find(Picture picture);
 	public Picture view(Picture picture);
 	public void add(Picture picture);
-	public void removeAll(int[] nos);
+	public void removeAll(int nos);
 }
