@@ -4,33 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메뉴 등록</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.5.js"></script>
-<script type="text/javascript">
-	function add() {
-		if (document.form.name.value.trim() == "") {
-			alert("메뉴 명을 입력 하세요.");
-		} else if (document.form.price.value.trim() == "") {
-			alert("가격을 입력 하세요.");
-		} else {
-			var name = document
-			.getElementById("name");
-			name.value = document.form.name.value.trim();
-			
-			var price = document
-			.getElementById("price");
-			price.value = document.form.price.value.trim();
-			document.getElementById('form').submit();
-		}
-	};
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>메뉴 등록</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.5.js"></script>
 </head>
 <body>
-	<form id="form" name="form" action="<c:url value="/menu/add" />" 
-		method="post">
+	<form id="form" name="form" action="<c:url value="/menu/add" />" method="post">
 		<div style="width:100%;" align="center">
 		<table style="width:30%;" class="table table-striped table-bordered">
 			<tr align="right">
@@ -83,5 +64,24 @@
 		</table>
 		</div>
 	</form>
+	
+	<script type="text/javascript">
+		function add() {
+			if (document.form.name.value.trim() == "") {
+				alert("메뉴 명을 입력 하세요.");
+			} else if (document.form.price.value.trim() == "") {
+				alert("가격을 입력 하세요.");
+			} else {
+				var name = document
+				.getElementById("name");
+				name.value = document.form.name.value.trim();
+				
+				var price = document
+				.getElementById("price");
+				price.value = document.form.price.value.trim();
+				document.getElementById('form').submit();
+			}
+		};
+	</script>
 </body>
 </html>
