@@ -50,11 +50,15 @@ public class MenuController {
    }
    
    @RequestMapping(value = "/adminlist/{restaurantNo}", method = RequestMethod.GET)
-   public ModelAndView adminFind(@PathVariable("restaurantNo") int restaurantNo, Menu menu, Picture picture) throws Exception {
+   public ModelAndView adminFind(@PathVariable("restaurantNo") int restaurantNo, Restaurant restaurant, Menu menu, Picture picture) throws Exception {
       ModelAndView modelAndView = new ModelAndView("/menu/adminList");
       
       List<Menu> listMenu = this.menuService.find(menu);
       modelAndView.addObject("listMenu", listMenu);
+      
+      restaurant.setNo(restaurantNo);
+      List<Restaurant> listRestaurant = this.restaurantService.find(restaurant);
+      modelAndView.addObject("listRestaurant", listRestaurant);
       
       picture.setRestaurantNo(restaurantNo);
       List<Picture> listPicture = this.pictureService.find(picture);
@@ -91,7 +95,7 @@ public class MenuController {
    
    @RequestMapping(value = "/add/{restaurantNo}", method = RequestMethod.POST)
    public ModelAndView add(@PathVariable("restaurantNo") int restaurantNo, Menu menu) throws Exception {
-      RedirectView redirectView = new RedirectView("/menu/adminlist/{restaurantNo}");
+      RedirectView redirectView = new RedirectView("/menu/adminlist/" + restaurantNo);
       redirectView.setExposeModelAttributes(false);
       
       this.menuService.add(menu);

@@ -105,8 +105,8 @@
          minMaxLevel : [ 1, 14 ]
       });
       
-      var x = ${listMenu[0].xCoordinate};
-      var y = ${listMenu[0].yCoordinate};
+      var x = ${listRestaurant[0].xCoordinate};
+      var y = ${listRestaurant[0].yCoordinate};
       
       var marker = new naver.maps.Marker({
          position : new naver.maps.LatLng(y, x),

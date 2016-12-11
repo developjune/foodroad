@@ -48,7 +48,7 @@
 			#{no}, 
 			#{name}, 
 			#{type}, 
-			#{restaurantNo}, 
+			#{restaurantNo},
 			#{price}
 		)
 	</insert>

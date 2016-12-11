@@ -49,6 +49,7 @@
 				AND RNUM BETWEEN #{itemStartNo} AND #{itemEndNo}
 			</if>
 		</where>
+		ORDER BY NO ASC
 	</select>
 	
 	<select id="count" parameterType="restaurant" resultType="int">

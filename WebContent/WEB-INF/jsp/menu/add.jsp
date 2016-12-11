@@ -29,8 +29,8 @@
 </script>
 </head>
 <body>
-	<form id="form" name="form" action="<c:url value="/menu/add/${restaurantNo}" />" 
-		method="post" enctype="multipart/form-data">
+	<form id="form" name="form" action="<c:url value="/menu/add/${menu.restaurantNo}" />" 
+		method="post">
 		<div style="width:100%;" align="center">
 		<table style="width:30%;" class="table table-striped table-bordered">
 			<tr align="right">

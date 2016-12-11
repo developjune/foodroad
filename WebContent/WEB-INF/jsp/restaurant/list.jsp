@@ -108,7 +108,7 @@ function search() {
             </c:if>
             <c:if test="${empty listRestaurant}">
                <tr>
-                  <td colspan="8" align="center">목록이 없습니다.</td>
+                  <td colspan="9" align="center">목록이 없습니다.</td>
                </tr>
             </c:if>
          </table>
