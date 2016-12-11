@@ -30,22 +30,12 @@ public class MainController {
 	private PictureService pictureService;
 	
 	@RequestMapping(value = "/index")
-	public ModelAndView main(Restaurant restaurant, Picture picture) throws Exception {
+	public ModelAndView main(Restaurant restaurant) throws Exception {
 		ModelAndView modelAndView = new ModelAndView("/main/index");
 		
 		List<Restaurant> listRestaurant = this.restaurantService.findMap(restaurant);
 		List<Code> listCode = CodeUtil.getCodes();
 		
-		picture.setRestaurantNo(restaurant.getNo());
-		List<Picture> listPicture = this.pictureService.find(picture);
-	      
-        if (listPicture.size() > 0) {
-    	    picture = listPicture.get(0);
-        } else {
-    	    picture = null;
-        }
-        
-	    modelAndView.addObject("listPicture", picture);
 		modelAndView.addObject("listRestaurant", listRestaurant);
 		modelAndView.addObject("codes", listCode);
 		modelAndView.addObject("type", restaurant.getType());
