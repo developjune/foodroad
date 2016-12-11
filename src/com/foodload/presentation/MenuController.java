@@ -93,9 +93,9 @@ public class MenuController {
       return modelAndView;
    }
    
-   @RequestMapping(value = "/add/{restaurantNo}", method = RequestMethod.POST)
-   public ModelAndView add(@PathVariable("restaurantNo") int restaurantNo, Menu menu) throws Exception {
-      RedirectView redirectView = new RedirectView("/menu/adminlist/" + restaurantNo);
+   @RequestMapping(value = "/add", method = RequestMethod.POST)
+   public ModelAndView add(Menu menu) throws Exception {
+      RedirectView redirectView = new RedirectView("/menu/adminlist/" + menu.getRestaurantNo());
       redirectView.setExposeModelAttributes(false);
       
       this.menuService.add(menu);
