@@ -44,7 +44,7 @@ public class MainController {
         } else {
     	    picture = null;
         }
-	      
+        
 	    modelAndView.addObject("listPicture", picture);
 		modelAndView.addObject("listRestaurant", listRestaurant);
 		modelAndView.addObject("codes", listCode);
