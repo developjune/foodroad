@@ -26,14 +26,14 @@
             	<tr>
                		<td><h5>x좌표:</h5></td>
                		<td>
-                  		<input type="text" id="xCoordinate1" class="form-control" name="xCoordinate1" disabled="disabled">
+                  		<input type="text" id="xCoordinate1" class="form-control" name="xCoordinate1" >
                   		<input type="hidden" id="xCoordinate" name="xCoordinate">
                		</td>
             	</tr>
             	<tr>
                		<td><h5>y좌표:</h5></td>
                		<td>
-                  		<input type="text" id="yCoordinate1" class="form-control" name="yCoordinate1" disabled="disabled">
+                  		<input type="text" id="yCoordinate1" class="form-control" name="yCoordinate1" >
                   		<input type="hidden" id="yCoordinate" name="yCoordinate">
                		</td>
             	</tr>

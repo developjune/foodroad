@@ -13,6 +13,7 @@
 		<result column="RESTAURANT_NAME" property="restaurantName" />
 		<result column="X_COORDINATE" property="xCoordinate" />
 		<result column="Y_COORDINATE" property="yCoordinate" />
+		<result column="TEL" property="tel" />
 	</resultMap>
 	
 	<select id="list" parameterType="menu" resultMap="menuResultMap">
@@ -24,7 +25,8 @@
 			M.RESTAURANT_NO,
 			R.NAME AS RESTAURANT_NAME,
 			R.X_COORDINATE,
-      		R.Y_COORDINATE
+      		R.Y_COORDINATE,
+      		R.TEL AS TEL
 		FROM MENU M, RESTAURANT R
 		<where>
 			<if test="restaurantNo > 0">

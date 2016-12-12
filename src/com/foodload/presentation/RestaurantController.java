@@ -92,7 +92,7 @@ public class RestaurantController {
 				this.pictureService.add(picture);
 				System.out.println("사진 등록 성공");
 			} catch (Exception e) {
-				System.out.println("오류" + i);
+				System.out.println("");
 			}
 		}
 

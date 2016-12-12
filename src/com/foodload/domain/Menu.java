@@ -11,13 +11,14 @@ public class Menu implements Serializable {
 	private String restaurantName;
 	private double xCoordinate;
 	private double yCoordinate;
+	private String tel;
 
 	public Menu() {
 		
 	}
 	
 	public Menu(int no, String name, String type, int price, int restaurantNo, String restaurantName, 
-			double xCoordinate, double yCoordinate) {
+			double xCoordinate, double yCoordinate, String tel) {
 		this.no = no;
 		this.name = name;
 		this.type = type;
@@ -26,6 +27,15 @@ public class Menu implements Serializable {
 		this.restaurantName = restaurantName;
 		this.xCoordinate = xCoordinate;
 		this.yCoordinate = yCoordinate;
+		this.tel = tel;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	public int getNo() {

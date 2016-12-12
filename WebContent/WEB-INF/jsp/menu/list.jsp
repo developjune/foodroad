@@ -14,6 +14,12 @@
 		<form action="<c:url value="/menu/list/${menu.restaurantNo }" />" method="post">
 			<table class="table table-striped table-hover table-bordered">
 				<tr>
+					<td align="center" colspan="2">${listMenu[0].restaurantName}</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2">전화번호 : ${listMenu[0].tel }</td>
+				</tr>
+				<tr>
 					<td align="center">메뉴명</td>
 					<td align="center">가격</td>
 				</tr>
